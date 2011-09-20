@@ -10,6 +10,11 @@ Screenshot::Screenshot(QString format, int w, int h)
 
 void Screenshot::setSize(int w, int h)
 {
+    if (w <= 0)
+        w = 800;
+    if (h <= 0)
+        h = 600;
+
     this->w = w;
     this->h = h;
 }
@@ -27,5 +32,8 @@ void Screenshot::newScreen()
 
 void Screenshot::setFormat(QString format)
 {
+    if (format != "JPG" && format != "PNG")
+        format = "JPG";
+
     this->format = format;
 }

@@ -3,3 +3,6 @@ syntax: glob
 moc_*
 *.o
 ui_*.h
+Makefile*
+*.moc
+*.exe

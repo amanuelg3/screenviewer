@@ -1,3 +1,5 @@
 syntax: glob
 *.pro.user
 moc_*
+*.o
+ui_*.h

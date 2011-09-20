@@ -24,7 +24,8 @@ void Screenshot::newScreen()
     //if (screen)
     //    delete screen;
 
-    QPixmap pixmap = QPixmap::grabWindow(QApplication::desktop()->winId(), 0, 0, w, h);
+    QPixmap pixmap = QPixmap::grabWindow(QApplication::desktop()->winId());
+    pixmap = pixmap.scaled(w, h);
     QBuffer buffer( screen );
     buffer.open( QIODevice::WriteOnly );
     pixmap.save( &buffer, format.toUtf8() ); // writes pixmap into ba in PNG format

@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include "screenview.h"
 
+
 #ifdef A
 int main(int argc, char *argv[])
 {

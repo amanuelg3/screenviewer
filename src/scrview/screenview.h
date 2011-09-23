@@ -2,7 +2,7 @@
 #define SCREENVIEW_H
 
 #include <QMainWindow>
-
+#include "capturer.h"
 namespace Ui {
     class ScreenView;
 }
@@ -17,6 +17,11 @@ public:
 
 private:
     Ui::ScreenView *ui;
+    QTimer *z;
+    Capturer *capturer;
+
+private slots:
+    void doTest();
 };
 
 #endif // SCREENVIEW_H

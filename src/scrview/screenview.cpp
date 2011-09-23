@@ -1,23 +1,31 @@
 #include "screenview.h"
 #include "ui_screenview.h"
-#include "screenshot.h"
 
 ScreenView::ScreenView(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ScreenView)
 {
     ui->setupUi(this);
-    // TEST to see if screenshot is working.
-    Screenshot *A;
-    A = new Screenshot("JPG", 800, 600);
-    A->newScreen();
-    QPixmap B;
-    B.loadFromData(*A->getScreen());
-    ui->label->setPixmap(B);
-    // TEST is over.
+
+    capturer = new Capturer(60, "JPG", 800, 600);
+    z = new QTimer(this);
+    connect(z, SIGNAL(timeout()), this, SLOT(doTest()));
+    z->start(500);
 }
 
 ScreenView::~ScreenView()
 {
     delete ui;
+}
+
+void ScreenView::doTest()
+{
+    capturer->start();
+    if (capturer->hasScreen())
+    {
+        qDebug() << "have screen";
+        QPixmap B;
+        B.loadFromData(*capturer->getScreen());
+        ui->label->setPixmap(B);
+    }
 }

@@ -8,6 +8,11 @@ Screenshot::Screenshot(QString format, int w, int h)
     screen = new QByteArray();
 }
 
+Screenshot::~Screenshot()
+{
+    delete screen;
+}
+
 void Screenshot::setSize(int w, int h)
 {
     if (w <= 0)

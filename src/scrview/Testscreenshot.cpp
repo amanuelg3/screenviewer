@@ -52,5 +52,5 @@ void TestScreenshot::testFormat()
     delete a;
 }
 
-QTEST_MAIN(TestScreenshot)
+//QTEST_MAIN(TestScreenshot)
 #include "Testscreenshot.moc"

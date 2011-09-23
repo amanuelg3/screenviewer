@@ -2,7 +2,7 @@
 #include "screenview.h"
 
 
-#ifdef A
+#ifndef A
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

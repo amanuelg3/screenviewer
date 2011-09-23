@@ -34,7 +34,7 @@ void Capturer::start()
     if (this->running == false)
     {
         this->running = true;
-        timer->start(int((fpm/60)*1000));
+        timer->start(int((fpm/60)*1000)); // start making screens, and putting them in screens list.
     }
 }
 
@@ -52,9 +52,9 @@ QByteArray* Capturer::getScreen()
 
 bool Capturer::hasScreen()
 {
-    if (screens->isEmpty())
+    if (screens->isEmpty()) // if list is empty.
         return false;
-    if (screens->first().sent)
+    if (screens->first().sent) // if first item from list is sent (not received yet, etc).
         return false;
 
     return true;

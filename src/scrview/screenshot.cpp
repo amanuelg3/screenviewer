@@ -26,14 +26,14 @@ void Screenshot::setSize(int w, int h)
 
 void Screenshot::newScreen()
 {
-    //if (screen)
-    //    delete screen;
+    if (!screen->isEmpty())
+        screen->clear();
 
     QPixmap pixmap = QPixmap::grabWindow(QApplication::desktop()->winId());
     pixmap = pixmap.scaled(w, h);
     QBuffer buffer( screen );
     buffer.open( QIODevice::WriteOnly );
-    pixmap.save( &buffer, format.toUtf8() ); // writes pixmap into ba in PNG format
+    pixmap.save( &buffer, format.toUtf8() ); // writes pixmap into ByteArray.
 }
 
 void Screenshot::setFormat(QString format)

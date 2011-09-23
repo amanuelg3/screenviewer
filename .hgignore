@@ -6,3 +6,5 @@ ui_*.h
 Makefile*
 *.moc
 *.exe
+release
+debug

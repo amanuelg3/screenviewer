@@ -14,6 +14,7 @@ SOURCES += main.cpp\
         screenview.cpp \
     screenshot.cpp \
     Testscreenshot.cpp \
+    TestCapturer.cpp  \
     capturer.cpp
 
 HEADERS  += screenview.h \

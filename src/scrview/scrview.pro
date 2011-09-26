@@ -13,13 +13,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         screenview.cpp \
     screenshot.cpp \
-    Testscreenshot.cpp \
     TestCapturer.cpp  \
-    capturer.cpp
+    capturer.cpp \
+    TestScreenshot.cpp
 
 HEADERS  += screenview.h \
     screenshot.h \
-    capturer.h
+    capturer.h \
+    TestCapturer.h \
+    TestScreenshot.h
 
 FORMS    += screenview.ui
 
@@ -32,6 +34,16 @@ symbian {
     TARGET.EPOCSTACKSIZE = 0x14000
     TARGET.EPOCHEAPSIZE = 0x020000 0x800000
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

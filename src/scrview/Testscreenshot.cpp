@@ -1,14 +1,9 @@
+#include "TestScreenshot.h"
+
 #include "screenshot.h"
 #include <QtTest/QtTest>
 
-class TestScreenshot: public QObject
-{
-    Q_OBJECT
-private slots:
-    void testNew();
-    void testResize();
-    void testFormat();
-};
+
 
 void TestScreenshot::testNew()
 {
@@ -51,6 +46,7 @@ void TestScreenshot::testFormat()
     QVERIFY2(a->getFormat() == "JPG", "Harder format test");
     delete a;
 }
-
+//#ifdef TEST
 //QTEST_MAIN(TestScreenshot)
-#include "Testscreenshot.moc"
+//#include "Testscreenshot.moc"
+//#endif

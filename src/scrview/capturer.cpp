@@ -52,10 +52,14 @@ QByteArray* Capturer::getScreen()
 
 bool Capturer::hasScreen()
 {
-    if (screens->isEmpty()) // if list is empty.
+    if (screens->isEmpty()) { // if list is empty.
+        qDebug() << "$$$$ empty list";
         return false;
-    if (screens->first().sent) // if first item from list is sent (not received yet, etc).
+    }
+    if (screens->first().sent) { // if first item from list is sent (not received yet, etc).
+        qDebug() << "$$$$ sent list";
         return false;
+    }
 
     return true;
 }

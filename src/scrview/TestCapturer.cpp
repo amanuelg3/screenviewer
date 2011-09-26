@@ -11,12 +11,12 @@ private slots:
 };
 
 
-void testFpm();
-void testStart() {
-    Capturer *A = new Capturer(800, 600, "png")
+void TestCapturer::testFpm() {}
+void TestCapturer::testStart() {
+    Capturer *A = new Capturer(30, "png", 800, 600);
 }
 
-void testSTOP() {
+void TestCapturer::testSTOP() {
 
 }
 

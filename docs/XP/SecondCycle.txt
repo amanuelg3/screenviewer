@@ -1,0 +1,3 @@
+Task  for second develompment cycle:
+
+TO DO: server captures screenshot, then sends it to viewer, to show it. Refractoring classes from first cycle

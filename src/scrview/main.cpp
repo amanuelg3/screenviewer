@@ -2,7 +2,7 @@
 #include "screenview.h"
 
 #include <QTest>
-#include "Testscreenshot.h"
+#include "TestScreenshot.h"
 #include "TestCapturer.h"
 
 //#define TEST

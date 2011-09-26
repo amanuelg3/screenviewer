@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>768</height>
+    <width>586</width>
+    <height>836</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,13 +18,39 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
-      <width>900</width>
-      <height>700</height>
+      <y>40</y>
+      <width>691</width>
+      <height>531</height>
      </rect>
     </property>
     <property name="text">
      <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="serverButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Server</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="clientButton">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>10</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Client</string>
     </property>
    </widget>
   </widget>

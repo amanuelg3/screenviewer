@@ -11,6 +11,7 @@ private slots:
     void disconnected();
 public:
     Server();
+    void send(QByteArray a);
 protected:
     void incomingConnection(int socketfd);
 private:

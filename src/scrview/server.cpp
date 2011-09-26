@@ -2,10 +2,12 @@
 
 Server::Server()
 {
+    client = NULL;
 }
 
 void Server::incomingConnection(int socketfd)
 {
+    qDebug() << "gavau klienta";
     if (!client)
     {
         client = new QTcpSocket(this);
@@ -20,14 +22,7 @@ void Server::incomingConnection(int socketfd)
 
 void Server::readyRead()
 {
-    QTcpSocket *clnt = (QTcpSocket*)sender();
-    while(clnt->canReadLine())
-    {
-        QString line = QString::fromUtf8(client->readLine()).trimmed();
-        qDebug() << "Read line:" << line;
 
-        clnt->write("You are accepted.");
-    }
 }
 
 void Server::disconnected()
@@ -35,4 +30,13 @@ void Server::disconnected()
     delete client;
     client = NULL;
     qDebug() << "Client disconnected!\n";
+}
+
+void Server::send(QByteArray a)
+{
+    if (client)
+    {
+        qDebug() << "turiu klient'a siunciu jam data.";
+        client->write(a);
+    }
 }

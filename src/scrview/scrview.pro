@@ -16,12 +16,14 @@ SOURCES += main.cpp\
     Testscreenshot.cpp \
     TestCapturer.cpp  \
     capturer.cpp \
-    server.cpp
+    server.cpp \
+    client.cpp
 
 HEADERS  += screenview.h \
     screenshot.h \
     capturer.h \
-    server.h
+    server.h \
+    client.h
 
 FORMS    += screenview.ui
 
@@ -34,6 +36,12 @@ symbian {
     TARGET.EPOCSTACKSIZE = 0x14000
     TARGET.EPOCHEAPSIZE = 0x020000 0x800000
 }
+
+
+
+
+
+
 
 
 

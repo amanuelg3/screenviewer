@@ -29,3 +29,10 @@ void Server::readyRead()
         clnt->write("You are accepted.");
     }
 }
+
+void Server::disconnected()
+{
+    delete client;
+    client = NULL;
+    qDebug() << "Client disconnected!\n";
+}

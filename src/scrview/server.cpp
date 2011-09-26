@@ -1,6 +1,6 @@
 #include "server.h"
 
-server::server()
+Server::Server()
 {
 }
 
@@ -26,6 +26,6 @@ void Server::readyRead()
         QString line = QString::fromUtf8(client->readLine()).trimmed();
         qDebug() << "Read line:" << line;
 
-        //clnt
+        clnt->write("You are accepted.");
     }
 }

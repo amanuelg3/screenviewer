@@ -4,13 +4,13 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 
-class server : public QTcpServer
+class Server : public QTcpServer
 {
 private slots:
     void readyRead();
     void disconnected();
 public:
-    server();
+    Server();
 protected:
     void incomingConnection(int socketfd);
 private:

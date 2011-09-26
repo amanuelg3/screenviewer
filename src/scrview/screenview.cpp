@@ -20,12 +20,43 @@ ScreenView::~ScreenView()
 
 void ScreenView::doTest()
 {
-    capturer->start();
-    if (capturer->hasScreen())
+    if (!clicked)
+        return;
+
+    if (server)
     {
-        qDebug() << "have screen";
-        QPixmap B;
-        B.loadFromData(*capturer->getScreen());
-        ui->label->setPixmap(B);
+        if (capturer->hasScreen())
+        {
+            a->send(*capturer->getScreen());
+        }
     }
+    else
+    {
+
+        if (b->fetchScreen())
+        {
+            QPixmap B;
+            B.loadFromData(*b->fetchScreen());
+            ui->label->setPixmap(B);
+        }
+
+    }
+}
+
+void ScreenView::on_serverButton_clicked()
+{
+    server = true;
+    a = new Server();
+    capturer->start();
+    a->listen(QHostAddress::Any, 4200);
+    clicked = true;
+}
+
+void ScreenView::on_clientButton_clicked()
+{
+    server = false;
+    b = new Client(this);
+    b->setHost("127.0.0.1");
+    b->connectToHost();
+    clicked = true;
 }

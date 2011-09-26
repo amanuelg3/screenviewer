@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui testlib
+QT       += core gui testlib network
 
 TARGET = untitled
 TEMPLATE = app
@@ -15,11 +15,14 @@ SOURCES += main.cpp\
     screenshot.cpp \
     TestCapturer.cpp  \
     capturer.cpp \
-    TestScreenshot.cpp
+    server.cpp \
+    client.cpp
 
 HEADERS  += screenview.h \
     screenshot.h \
     capturer.h \
+    server.h \
+    client.h
     TestCapturer.h \
     TestScreenshot.h
 

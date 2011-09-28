@@ -1,3 +1,15 @@
-Task  for second develompment cycle:
+Tasks  for second develompment cycle:
 
-TO DO: server captures screenshot, then sends it to viewer, to show it. Refractoring classes from first cycle
+Class Server:
+- Listens for incoming connections
+- Registers the client
+- Recieves bytes arrays
+- Sends bytes arrays 
+
+Class Client:
+- Connects to the server
+- Recieves bytes arrays
+- Sends bytes arrays 
+- Disconnects from the server
+
+STATUS: DONE

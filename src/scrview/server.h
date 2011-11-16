@@ -11,11 +11,12 @@ private slots:
     void disconnected();
 public:
     Server();
-    void send(QByteArray a);
+    void send(QByteArray data);
 protected:
     void incomingConnection(int socketfd);
 private:
     QTcpSocket *client;
+
 };
 
 #endif // SERVER_H

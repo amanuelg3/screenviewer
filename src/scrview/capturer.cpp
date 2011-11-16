@@ -11,7 +11,6 @@ Capturer::Capturer(int fpm, QString format, int w, int h)
 
 void Capturer::work()
 {
-    qDebug() << "doing work.";
     ScreenList *temp;
     temp = new ScreenList();
     temp->screen = new Screenshot(format, w, h);
@@ -53,11 +52,11 @@ QByteArray* Capturer::getScreen()
 bool Capturer::hasScreen()
 {
     if (screens->isEmpty()) { // if list is empty.
-        qDebug() << "$$$$ empty list";
+//        qDebug() << "$$$$ empty list";
         return false;
     }
     if (screens->first().sent) { // if first item from list is sent (not received yet, etc).
-        qDebug() << "$$$$ sent list";
+//        qDebug() << "$$$$ sent list";
         return false;
     }
 

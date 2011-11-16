@@ -27,16 +27,20 @@ void ScreenView::doTest()
     {
         if (capturer->hasScreen())
         {
+            qDebug() << capturer->getScreen()->length();
             a->send(*capturer->getScreen());
         }
     }
     else
     {
 
-        if (b->fetchScreen())
+        if (b->isMade())// && b->fetchScreen()
         {
             QPixmap B;
             B.loadFromData(*b->fetchScreen());
+            b->canDel();
+            qDebug() << "Galima istrinti";
+            qDebug() << b->fetchScreen()->length();
             ui->label->setPixmap(B);
         }
 

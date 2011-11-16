@@ -4,18 +4,21 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 
-class Server : public QTcpServer
+class Server : public QObject
 {
-private slots:
+    Q_OBJECT
+public slots:
     void readyRead();
     void disconnected();
+    void acceptConnection();
 public:
     Server();
     void send(QByteArray data);
-protected:
-    void incomingConnection(int socketfd);
+    void listen(QHostAddress::SpecialAddress host, int port);
 private:
     QTcpSocket *socket;
+    QTcpServer *server;
+    quint16 blockSize;
 
 };
 

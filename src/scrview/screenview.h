@@ -5,6 +5,7 @@
 #include "capturer.h"
 #include "server.h"
 #include "client.h"
+#include "mouse.h"
 
 namespace Ui {
     class ScreenView;
@@ -24,10 +25,12 @@ private:
     Capturer *capturer;
     Server *a;
     Client *b;
+    Mouse *mouse;
     bool server;
     bool clicked;
 private slots:
     void doTest();
+    void doMouseTest();
     void on_serverButton_clicked();
     void on_clientButton_clicked();
 };

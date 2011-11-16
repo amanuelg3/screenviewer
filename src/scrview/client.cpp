@@ -66,5 +66,28 @@ QString Client::getHost()
 
 void Client::send(QByteArray a)
 {
-    socket->write(a);
+    //socket->write(a);
+}
+
+void Client::send(bool isRight, bool isLeft, quint16 x, quint16 y)
+{
+    if(socket == NULL) return;
+    if(socket->state() != QAbstractSocket::ConnectedState ) return;
+
+    QByteArray tmp;
+    quint16 size = sizeof(isRight) + sizeof(isLeft) + sizeof(x) + sizeof(y);
+    qDebug() << size;
+    QDataStream out(&tmp, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_4_2);
+    out << size;
+    out << (quint16) 0;
+    qDebug() << "Issiunciam peles coord: " << size;
+
+    //tmp.append((quint16) 0);
+    //qDebug() << "Issiunciam: " << (quint32) tmp.size();
+    out << isRight << isLeft << x << y;
+
+
+    socket->write(tmp);
+    socket->flush();
 }

@@ -3,50 +3,59 @@
 
 Server::Server()
 {
-    client = NULL;
+    socket = NULL;
 }
 
 void Server::incomingConnection(int socketfd)
 {
     qDebug() << "Gavau klienta";
-    if (!client)
+    if (!socket)
     {
-        client = new QTcpSocket(this);
-        client->setSocketDescriptor(socketfd);
+        socket = new QTcpSocket(this);
+        socket->setSocketDescriptor(socketfd);
 
-        qDebug() << "New client from:" << client->peerAddress().toString();
+        qDebug() << "New client from:" << socket->peerAddress().toString();
 
-        connect(client, SIGNAL(readyRead()), this, SLOT(readyRead()));
-        connect(client, SIGNAL(disconnected()), this, SLOT(disconnected()));
+        connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+        connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
     }
 }
 
 void Server::readyRead()
 {
+    /*
+    QDataStream in(socket);
+    in.setVersion(QDataStream::Qt_4_0);
+
+    if (blockSize == 0) {
+        if (socket->bytesAvailable() < (int)sizeof(quint16))
+            return;
+        in >> blockSize;
+        qDebug() << "Tikiuosi gauti blockSize dydzio paveiksliuka:" << blockSize;
+    }
+
+    qDebug() << "Baitu laukia eileje:" << socket->bytesAvailable();
+    if (socket->bytesAvailable() < blockSize)
+        return;
+    *screen = socket->read(blockSize);
+    isDone = true;
+    qDebug() << "Tokio dydzio paveiksliuka nuskaiciau:" << screen->size();
+    blockSize = 0;
+    */
 
 }
 
 void Server::disconnected()
 {
-    delete client;
-    client = NULL;
+    delete socket;
+    socket = NULL;
     qDebug() << "Client disconnected!\n";
 }
 
 void Server::send(QByteArray data)
 {
-    /*if (client && (client->bytesToWrite() == 0))
-    {
-        //client->write(a.size());
-        //client->write()
-        qDebug() << "turiu klient'a siunciu jam data.";
-        client->write(a);
-        client->write(QByteArray("done"));
-        //qSleep(10000);
-        //QTest::qSleep(1000);
-    }*/
-    if(client == NULL) return;
-    if(client->state() != QAbstractSocket::ConnectedState ) return;
+    if(socket == NULL) return;
+    if(socket->state() != QAbstractSocket::ConnectedState ) return;
 
     QByteArray tmp;
     QDataStream out(&tmp, QIODevice::WriteOnly);
@@ -58,6 +67,7 @@ void Server::send(QByteArray data)
     //qDebug() << "Issiunciam: " << (quint32) tmp.size();
 
 
-    client->write(tmp);
-    client->flush();
+    socket->write(tmp);
+    socket->flush();
 }
+

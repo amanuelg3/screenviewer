@@ -34,29 +34,10 @@ void Client::readyRead()
     qDebug() << "Baitu laukia eileje:" << socket->bytesAvailable();
     if (socket->bytesAvailable() < blockSize)
         return;
-
-    if(canDelete) {
-        canDelete = false;
-
-        isDone = false;
-        screen = new QByteArray();
-        *screen = socket->read(blockSize);
-        isDone = true;
-
-        qDebug() << "Tokio dydzio paveiksliuka nuskaiciau:" << screen->size();
-
-
-        blockSize = 0;
-    }
-
-
-    /*
-    if (newScreen == currentScreen) {
-        QTimer::singleShot(0, this, SLOT(requestNewFortune()));
-        return;
-    }
-    currentScreen = newScreen;
-    */
+    *screen = socket->read(blockSize);
+    isDone = true;
+    qDebug() << "Tokio dydzio paveiksliuka nuskaiciau:" << screen->size();
+    blockSize = 0;
 }
 
 void Client::requestNewFortune() {

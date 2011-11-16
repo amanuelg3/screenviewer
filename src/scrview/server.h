@@ -15,7 +15,7 @@ public:
 protected:
     void incomingConnection(int socketfd);
 private:
-    QTcpSocket *client;
+    QTcpSocket *socket;
 
 };
 

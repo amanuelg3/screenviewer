@@ -1,4 +1,5 @@
 #include "server.h"
+#include <QTest>
 
 Server::Server()
 {
@@ -7,7 +8,7 @@ Server::Server()
 
 void Server::incomingConnection(int socketfd)
 {
-    qDebug() << "gavau klienta";
+    qDebug() << "Gavau klienta";
     if (!client)
     {
         client = new QTcpSocket(this);
@@ -32,11 +33,31 @@ void Server::disconnected()
     qDebug() << "Client disconnected!\n";
 }
 
-void Server::send(QByteArray a)
+void Server::send(QByteArray data)
 {
-    if (client)
+    /*if (client && (client->bytesToWrite() == 0))
     {
+        //client->write(a.size());
+        //client->write()
         qDebug() << "turiu klient'a siunciu jam data.";
         client->write(a);
-    }
+        client->write(QByteArray("done"));
+        //qSleep(10000);
+        //QTest::qSleep(1000);
+    }*/
+    if(client == NULL) return;
+    if(client->state() != QAbstractSocket::ConnectedState ) return;
+
+    QByteArray tmp;
+    QDataStream out(&tmp, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_4_2);
+    out << (quint32) data.size();
+    qDebug() << "Issiunciam: " << (quint32) data.size();
+
+    tmp.append(data);
+    //qDebug() << "Issiunciam: " << (quint32) tmp.size();
+
+
+    client->write(tmp);
+    client->flush();
 }

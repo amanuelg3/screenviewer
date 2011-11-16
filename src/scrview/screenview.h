@@ -26,7 +26,6 @@ private:
     Client *b;
     bool server;
     bool clicked;
-
 private slots:
     void doTest();
     void on_serverButton_clicked();

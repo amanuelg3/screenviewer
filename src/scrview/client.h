@@ -11,14 +11,20 @@ private:
     QTcpSocket *socket;
     QString host;
     QByteArray *screen;
+    bool isDone;
+    quint16 blockSize;
+    bool canDelete;
 public:
     explicit Client(QObject *parent = 0);
     void setHost(QString host);
     QString getHost();
     void connectToHost();
     void disconnect();
+    void requestNewFortune();
     void send(QByteArray a);
-    QByteArray* fetchScreen() { return screen; }
+    bool isMade() { return isDone; }
+    void canDel() { canDelete = true; isDone = false; }
+    QByteArray* fetchScreen() { isDone = true; return screen; }
 
 signals:
 

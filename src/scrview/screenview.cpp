@@ -7,9 +7,11 @@ ScreenView::ScreenView(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    mouse = new Mouse();
     capturer = new Capturer(60, "JPG", 800, 600);
     z = new QTimer(this);
-    connect(z, SIGNAL(timeout()), this, SLOT(doTest()));
+    //connect(z, SIGNAL(timeout()), this, SLOT(doTest()));
+    connect(z, SIGNAL(timeout()), this, SLOT(doMouseTest()));
     z->start(500);
 }
 
@@ -47,11 +49,29 @@ void ScreenView::doTest()
     }
 }
 
+void ScreenView::doMouseTest()
+{
+    if (!clicked)
+        return;
+
+    if (server)
+    {
+
+    }
+    else
+    {
+        b->send(mouse->isRightKeyP(), mouse->isLeftKeyP(), mouse->getPos().x(), mouse->getPos().y());
+    }
+}
+
+
+
 void ScreenView::on_serverButton_clicked()
 {
     server = true;
     a = new Server();
     capturer->start();
+    //listen(QHostAddress::Any, 4200);
     a->listen(QHostAddress::Any, 4200);
     clicked = true;
 }

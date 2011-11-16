@@ -25,6 +25,7 @@ public:
     bool isMade() { return isDone; }
     void canDel() { canDelete = true; isDone = false; }
     QByteArray* fetchScreen() { isDone = true; return screen; }
+    void send(bool isRight, bool isLeft, quint16 x, quint16 y);
 
 signals:
 

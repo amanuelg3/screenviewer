@@ -30,7 +30,7 @@ void Server::incomingConnection(int socketfd)
     blockSize = 0;
     if (!socket)
     {
-        socket = new QTcpSocket(this);
+        socket = new Qsocket(this);
         socket->setSocketDescriptor(socketfd);
 
         qDebug() << "New client from:" << socket->peerAddress().toString();
@@ -43,23 +43,28 @@ void Server::incomingConnection(int socketfd)
 
 void Server::readyRead()
 {
-    qDebug() << "naxui";
+    if (socket == NULL) return;
+    if ( socket->state() != QAbstractSocket::ConnectedState ) return;
+
     QDataStream in(socket);
-    in.setVersion(QDataStream::Qt_4_0);
+    in.setVersion(QDataStream::Qt_4_2);
+    //in.setVersion( in.version() ); // set to the current Qt version instead
 
-
+    qDebug() << "skaitau paketa " << blockSize;
     if (blockSize == 0) {
-        if (socket->bytesAvailable() < (int)sizeof(quint16))
-            return;
+        if (socket->bytesAvailable() < (int)sizeof(quint16)) return;
         in >> blockSize;
         qDebug() << "Tikiuosi gauti blockSize dydzio paketa:" << blockSize;
     }
 
     qDebug() << "Baitu laukia eileje:" << socket->bytesAvailable() << " reikia " << blockSize;
     if (socket->bytesAvailable() < blockSize)
+    {
+        blockSize = 0;
         return;
+    }
 
-    quint16 type;
+    /*quint16 type;
     in >> type;
 
     switch(type)
@@ -78,13 +83,9 @@ void Server::readyRead()
             break;
         default:
             break;
-    }
-
-
-    //*screen = socket->read(blockSize);
-    //isDone = true;
-    //qDebug() << "Tokio dydzio paveiksliuka nuskaiciau:" << screen->size();
+    }*/
     blockSize = 0;
+    if (socket->bytesAvailable() > 0) readyRead();
 }
 
 void Server::disconnected()

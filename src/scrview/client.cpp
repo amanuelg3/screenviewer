@@ -74,20 +74,22 @@ void Client::send(bool isRight, bool isLeft, quint16 x, quint16 y)
     if(socket == NULL) return;
     if(socket->state() != QAbstractSocket::ConnectedState ) return;
 
-    QByteArray tmp;
-    quint16 size = sizeof(isRight) + sizeof(isLeft) + sizeof(x) + sizeof(y);
-    qDebug() << size;
-    QDataStream out(&tmp, QIODevice::WriteOnly);
+    QByteArray block;
+    QDataStream out(&block, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_2);
+    quint16 size;
+
+    /*out << (quint16) 0; //paketo dydis
+    out << (quint16) 0; //tipas
+    out << isRight;
+    out << isLeft;
+    out << x;
+    out << y;*/
+    size = 25;
+    //out.device()->seek(0);
     out << size;
-    out << (quint16) 0;
-    qDebug() << "Issiunciam peles coord: " << size;
+    qDebug() << "Issiunciam peles coord: " << (quint16)block.size() << " blocksize " << size;
 
-    //tmp.append((quint16) 0);
-    //qDebug() << "Issiunciam: " << (quint32) tmp.size();
-    out << isRight << isLeft << x << y;
-
-
-    socket->write(tmp);
+    socket->write(block);
     socket->flush();
 }

@@ -16,6 +16,7 @@ public:
     void send(QByteArray data);
     void listen(QHostAddress::SpecialAddress host, int port);
 private:
+
     QTcpSocket *socket;
     QTcpServer *server;
     quint16 blockSize;

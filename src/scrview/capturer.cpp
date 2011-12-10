@@ -3,6 +3,8 @@
 Capturer::Capturer(int fpm, QString format, int w, int h)
     : fpm(fpm), format(format), w(w), h(h)
 {
+    if (this->fpm < 0)
+        this->fpm = 0;
     screens = new QList<ScreenList>;
     timer = new QTimer(this);
 

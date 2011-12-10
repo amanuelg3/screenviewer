@@ -44,9 +44,3 @@ void TestCapturer::testStartStop() {
     delete A;
     */
 }
-
-//intervalas min, formatas
-//#ifdef TEST
-//QTEST_MAIN(TestCapturer)
-//#include "TestCapturer.moc"
-//#endif

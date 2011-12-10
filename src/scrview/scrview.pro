@@ -12,22 +12,30 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         screenview.cpp \
+    abstractpacket.cpp \
     screenshot.cpp \
     capturer.cpp \
     server.cpp \
     client.cpp \
     TestScreenshot.cpp \
     TestCapturer.cpp \
-    mouse.cpp
+    mouse.cpp \
+    sspacket.cpp \
+    TestSsPacket.cpp \
+    mousepacket.cpp
 
 HEADERS  += screenview.h \
+	abstractpacket.h \
     screenshot.h \
     capturer.h \
     server.h \
     client.h \
     TestCapturer.h \
     TestScreenshot.h \
-    mouse.h
+    mouse.h \
+    sspacket.h \
+    TestSsPacket.h \
+    mousepacket.h
 
 FORMS    += screenview.ui
 
@@ -40,6 +48,22 @@ symbian {
     TARGET.EPOCSTACKSIZE = 0x14000
     TARGET.EPOCHEAPSIZE = 0x020000 0x800000
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

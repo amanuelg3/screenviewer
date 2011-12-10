@@ -1,4 +1,4 @@
-#include "TestScreenshot.h"
+#include "testscreenshot.h"
 
 #include "screenshot.h"
 #include <QtTest/QtTest>

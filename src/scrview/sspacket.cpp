@@ -1,5 +1,4 @@
 #include "sspacket.h"
-#include <QTcpSocket>
 
 SsPacket::SsPacket()
 {
@@ -19,23 +18,25 @@ void SsPacket::makePacket()
     blockSize = ss->getScreen()->size();
     out << (quint16) blockSize;
     out << (quint16) type;
-    currentPacket->append(*ss);
+    currentPacket->append(*ss->getScreen());
 }
 
-void SsPacket::setNewContent(QByteArray *ss)
+void SsPacket::setNewContent(Screenshot *ss)
 {
     delete this->ss;
     this->ss = ss;
 }
 
-static QByteArray* analyzePacket(QDataStream* in)
+static Screenshot* analyzePacket(QTcpSocket *socket, quint16 size)
 {
-    Screenshot* tmp;
-    QByteArray* screen;
-    i
+    QByteArray* screen = new QByteArray();
+     *screen = socket->read(size);
+    Screenshot* tmp = new Screenshot(screen);
+    return tmp;
+
 }
 
-QByteArray* SsPacket::getContent()
+Screenshot* SsPacket::getContent()
 {
     return ss;
 }

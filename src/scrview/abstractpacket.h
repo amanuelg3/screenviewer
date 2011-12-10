@@ -17,6 +17,7 @@ public:
 protected:
     quint16 blockSize;
     QByteArray* currentPacket;
+    quint16 type;
 };
 
 #endif // ABSTRACTPACKET_H

@@ -4,6 +4,21 @@
 #include <QWidget>
 #include <QMouseEvent>
 
+struct MouseData {
+    MouseData(){}
+    MouseData(int x, int y, bool l, bool r) {
+        this->x = x;
+        this->y = y;
+        this->isLeftKey = l;
+        this->isRightKey = r;
+    }
+
+    int x;
+    int y;
+    bool isLeftKey;
+    bool isRightKey;
+};
+
 class Mouse : public QWidget
 {
 public:
@@ -11,6 +26,7 @@ public:
     bool isLeftKeyP() { return isLeftKey; }
     bool isRightKeyP() { return isRightKey; }
     QPoint getPos() { return pos; }
+    MouseData* formPacketData();
 private:
     QPoint pos;
     bool isLeftKey;

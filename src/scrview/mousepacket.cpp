@@ -15,7 +15,7 @@ void MousePacket::makePacket()
     currentPacket = new QByteArray();
     QDataStream out(currentPacket, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_2);
-    blockSize = md->getScreen()->size();
+    blockSize = sizeof(md->isRightKey) + sizeof(md->isLeftKey) + sizeof(md->x) + sizeof(md->y);
     out << (quint16) blockSize;
     out << (quint16) type;
     out << md->x;
@@ -30,9 +30,9 @@ void MousePacket::setNewContent(MouseData *md)
     this->md = md;
 }
 
-static MouseData* MousePacket::analyzePacket(QDataStream& in)
+MouseData* MousePacket::analyzePacket(QDataStream& in)
 {
-    MouseData* tmp;
+    MouseData* tmp = new MouseData();
     in >> tmp->x;
     in >> tmp->y;
     in >> tmp->isLeftKey;
@@ -40,7 +40,7 @@ static MouseData* MousePacket::analyzePacket(QDataStream& in)
     return tmp;
 }
 
-MouseData* SsPacket::getContent()
+MouseData* MousePacket::getContent()
 {
     return md;
 }

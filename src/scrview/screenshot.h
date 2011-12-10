@@ -20,6 +20,7 @@ private:
     QByteArray *screen;
 public:
     Screenshot(QString format, int w, int h);
+    Screenshot(QByteArray* scr);
     ~Screenshot();
 
     void setSize(int w, int h);

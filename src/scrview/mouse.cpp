@@ -14,7 +14,7 @@ void Mouse::mouseMoveEvent(QMouseEvent *mEvent)
     update();
 }
 
-MouseData* Mouse::getPacket()
+MouseData* Mouse::formPacketData()
 {
     MouseData* tmp = new MouseData();
     tmp->x = pos.x();

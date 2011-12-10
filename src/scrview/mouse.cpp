@@ -14,6 +14,16 @@ void Mouse::mouseMoveEvent(QMouseEvent *mEvent)
     update();
 }
 
+MouseData* Mouse::getPacket()
+{
+    MouseData* tmp = new MouseData();
+    tmp->x = pos.x();
+    tmp->y = pos.y();
+    tmp->isRightKey = isRightKeyP();
+    tmp->isLeftKey = isLeftKeyP();
+    return tmp;
+}
+
 void Mouse::mousePressEvent (QMouseEvent *mEvent)
 {
     switch (mEvent->button())

@@ -17,12 +17,13 @@ SOURCES += main.cpp\
     capturer.cpp \
     server.cpp \
     client.cpp \
-    TestScreenshot.cpp \
-    TestCapturer.cpp \
     mouse.cpp \
     sspacket.cpp \
-    TestSsPacket.cpp \
-    mousepacket.cpp
+    mousepacket.cpp \
+    testmousepacket.cpp \
+    testcapturer.cpp \
+    testscreenshot.cpp \
+    testsspacket.cpp
 
 HEADERS  += screenview.h \
 	abstractpacket.h \
@@ -30,12 +31,13 @@ HEADERS  += screenview.h \
     capturer.h \
     server.h \
     client.h \
-    TestCapturer.h \
-    TestScreenshot.h \
     mouse.h \
     sspacket.h \
-    TestSsPacket.h \
-    mousepacket.h
+    mousepacket.h \
+    testmousepacket.h \
+    testcapturer.h \
+    testscreenshot.h \
+    testsspacket.h
 
 FORMS    += screenview.ui
 
@@ -48,6 +50,20 @@ symbian {
     TARGET.EPOCSTACKSIZE = 0x14000
     TARGET.EPOCHEAPSIZE = 0x020000 0x800000
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

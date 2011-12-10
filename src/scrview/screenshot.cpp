@@ -8,6 +8,16 @@ Screenshot::Screenshot(QString format, int w, int h)
     screen = new QByteArray();
 }
 
+Screenshot::Screenshot(QByteArray* scr)
+{
+    screen = scr;
+    QPixmap B;
+    B.loadFromData(*screen);
+    setSize(B.width(), B.height());
+    setFormat("PNG");   //fix this
+}
+
+
 Screenshot::~Screenshot()
 {
     delete screen;

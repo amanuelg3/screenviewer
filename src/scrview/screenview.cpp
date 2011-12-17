@@ -7,12 +7,8 @@ ScreenView::ScreenView(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    mouse = new Mouse();
     capturer = new Capturer(60, "JPG", 800, 600);
-    z = new QTimer(this);
     //connect(z, SIGNAL(timeout()), this, SLOT(doTest()));
-    connect(z, SIGNAL(timeout()), this, SLOT(doMouseTest()));
-    z->start(500);
 }
 
 ScreenView::~ScreenView()
@@ -83,4 +79,10 @@ void ScreenView::on_clientButton_clicked()
     b->setHost("127.0.0.1");
     b->connectToHost();
     clicked = true;
+    mouse = new Mouse();
+    setMouseTracking(true);
+    mouse->setMouseTracking(true);
+    z = new QTimer(this);
+    z->start(500);
+    connect(z, SIGNAL(timeout()), this, SLOT(doMouseTest()));
 }

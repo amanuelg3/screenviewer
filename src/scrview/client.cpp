@@ -16,7 +16,7 @@ Client::Client(QObject *parent) :
 
 void Client::connected()
 {
-    socket->write(QString("Connected :P").toUtf8());
+    //socket->write(QString("Connected :P").toUtf8());
 }
 
 void Client::readyRead()
@@ -77,17 +77,14 @@ void Client::send(bool isRight, bool isLeft, quint16 x, quint16 y)
     QByteArray block;
     QDataStream out(&block, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_2);
-    quint16 size;
-
-    /*out << (quint16) 0; //paketo dydis
+    quint16 size = sizeof(isRight) + sizeof(isLeft) + sizeof(x) + sizeof(y) + sizeof(quint16);
+    out << size; //paketo dydis
     out << (quint16) 0; //tipas
     out << isRight;
     out << isLeft;
     out << x;
-    out << y;*/
-    size = 25;
-    //out.device()->seek(0);
-    out << size;
+    out << y;
+
     qDebug() << "Issiunciam peles coord: " << (quint16)block.size() << " blocksize " << size;
 
     socket->write(block);

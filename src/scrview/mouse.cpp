@@ -3,7 +3,6 @@
 Mouse::Mouse()
 {
     pos = QPoint (0, 0);
-    setMouseTracking(true);
     isRightKey = false;
     isLeftKey = false;
 }
@@ -52,4 +51,9 @@ void Mouse::mouseReleaseEvent(QMouseEvent *mEvent)
         default:
             break;
     }
+}
+
+static void setMouseState(int x, int y, bool left, bool right)
+{
+
 }

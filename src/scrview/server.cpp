@@ -16,10 +16,10 @@ void Server::acceptConnection()
     blockSize = 0;
     if (!socket)
     {
-    socket = server->nextPendingConnection();
-    connect(socket, SIGNAL(readyRead()),
-            this, SLOT(readyRead()));
-    connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
+        socket = server->nextPendingConnection();
+        connect(socket, SIGNAL(readyRead()),
+                this, SLOT(readyRead()));
+        connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
     }
 }
 
@@ -59,12 +59,9 @@ void Server::readyRead()
 
     qDebug() << "Baitu laukia eileje:" << socket->bytesAvailable() << " reikia " << blockSize;
     if (socket->bytesAvailable() < blockSize)
-    {
-        blockSize = 0;
         return;
-    }
 
-    /*quint16 type;
+    quint16 type;
     in >> type;
 
     switch(type)
@@ -83,7 +80,7 @@ void Server::readyRead()
             break;
         default:
             break;
-    }*/
+    }
     blockSize = 0;
     if (socket->bytesAvailable() > 0) readyRead();
 }

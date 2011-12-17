@@ -27,6 +27,7 @@ public:
     bool isRightKeyP() { return isRightKey; }
     QPoint getPos() { return pos; }
     MouseData* formPacketData();
+    static void setMouseState(int x, int y, bool left, bool right);
 private:
     QPoint pos;
     bool isLeftKey;

@@ -22,19 +22,17 @@ struct MouseData {
 class Mouse : public QWidget
 {
 public:
-    Mouse();
+    Mouse(QWidget *parent = 0);
     bool isLeftKeyP() { return isLeftKey; }
     bool isRightKeyP() { return isRightKey; }
-    QPoint getPos() { return pos; }
+    QPoint getPos() { return QCursor::pos(); }
     MouseData* formPacketData();
     static void setMouseState(int x, int y, bool left, bool right);
 private:
     QPoint pos;
     bool isLeftKey;
     bool isRightKey;
-    void mouseMoveEvent(QMouseEvent *);
-    void mousePressEvent(QMouseEvent *);
-    void mouseReleaseEvent(QMouseEvent *);
+    bool eventFilter(QObject *obj, QEvent *event);
 };
 
 #endif // MOUSE_H

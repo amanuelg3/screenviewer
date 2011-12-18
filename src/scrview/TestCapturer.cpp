@@ -1,4 +1,4 @@
-#include "testcapturer.h"
+#include "TestCapturer.h"
 #include "capturer.h"
 
 #include <QtTest/QtTest>

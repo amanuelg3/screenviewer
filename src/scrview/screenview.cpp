@@ -1,5 +1,6 @@
 #include "screenview.h"
 #include "ui_screenview.h"
+#include "IPdatabase.h"
 
 ScreenView::ScreenView(QWidget *parent) :
     QMainWindow(parent),
@@ -13,6 +14,9 @@ ScreenView::ScreenView(QWidget *parent) :
     //connect(z, SIGNAL(timeout()), this, SLOT(doTest()));
     connect(z, SIGNAL(timeout()), this, SLOT(doMouseTest()));
     z->start(500);
+    IPdatabase ip;
+    ip.setIP("", "");
+    //ip.getIP("", "");
 }
 
 ScreenView::~ScreenView()

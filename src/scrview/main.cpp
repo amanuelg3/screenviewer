@@ -2,9 +2,9 @@
 #include "screenview.h"
 
 #include <QTest>
-#include "testscreenshot.h"
-#include "testcapturer.h"
-#include "testssPacket.h"
+#include "TestScreenshot.h"
+#include "TestCapturer.h"
+#include "TestSsPacket.h"
 #include "testmousepacket.h"
 
 //#define TEST

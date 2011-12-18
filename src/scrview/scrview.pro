@@ -1,17 +1,14 @@
-#-------------------------------------------------
-#
+# -------------------------------------------------
 # Project created by QtCreator 2011-09-19T15:57:50
-#
-#-------------------------------------------------
-
-QT       += core gui testlib network
-
+# -------------------------------------------------
+QT += core \
+    gui \
+    testlib \
+    network
 TARGET = untitled
 TEMPLATE = app
-
-
-SOURCES += main.cpp\
-        screenview.cpp \
+SOURCES += main.cpp \
+    screenview.cpp \
     abstractpacket.cpp \
     screenshot.cpp \
     capturer.cpp \
@@ -23,10 +20,11 @@ SOURCES += main.cpp\
     testmousepacket.cpp \
     testcapturer.cpp \
     testscreenshot.cpp \
-    testsspacket.cpp
-
-HEADERS  += screenview.h \
-	abstractpacket.h \
+    testsspacket.cpp \
+    IPdatabase.cpp \
+    TestScreenshot.cpp
+HEADERS += screenview.h \
+    abstractpacket.h \
     screenshot.h \
     capturer.h \
     server.h \
@@ -37,70 +35,17 @@ HEADERS  += screenview.h \
     testmousepacket.h \
     testcapturer.h \
     testscreenshot.h \
-    testsspacket.h
-
-FORMS    += screenview.ui
-
+    testsspacket.h \
+    IPdatabase.h \
+    TestScreenshot.h
+FORMS += screenview.ui
 CONFIG += mobility
 MOBILITY = 
-
-symbian {
+symbian { 
     TARGET.UID3 = 0xeadfae89
-    # TARGET.CAPABILITY += 
+    
+    # TARGET.CAPABILITY +=
     TARGET.EPOCSTACKSIZE = 0x14000
-    TARGET.EPOCHEAPSIZE = 0x020000 0x800000
+    TARGET.EPOCHEAPSIZE = 0x020000 \
+        0x800000
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

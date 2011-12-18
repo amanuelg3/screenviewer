@@ -29,7 +29,7 @@ public:
     MouseData* formPacketData();
     void rightClick(bool t) { isRightKey = t; }
     void leftClick(bool t) { isLeftKey = t; }
-    static void setMouseState(int x, int y, bool left, bool right);
+    void setMouseState(int x, int y, bool left, bool right);
 private:
     QPoint pos;
     bool isLeftKey;

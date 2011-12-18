@@ -79,10 +79,11 @@ void ScreenView::on_clientButton_clicked()
     b->setHost("127.0.0.1");
     b->connectToHost();
     clicked = true;
-    mouse = new Mouse();
+    mouse = new Mouse(this);
     setMouseTracking(true);
     mouse->setMouseTracking(true);
     z = new QTimer(this);
     z->start(500);
     connect(z, SIGNAL(timeout()), this, SLOT(doMouseTest()));
+    //addWidget(mouse);
 }

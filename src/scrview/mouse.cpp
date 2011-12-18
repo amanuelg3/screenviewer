@@ -1,17 +1,12 @@
 #include "mouse.h"
+#include <windows.h>
 
-Mouse::Mouse()
+Mouse::Mouse(QWidget *parent) : QWidget(parent)
 {
-    pos = QPoint (0, 0);
     setMouseTracking(true);
+    pos = QPoint (0, 0);
     isRightKey = false;
     isLeftKey = false;
-}
-
-void Mouse::mouseMoveEvent(QMouseEvent *mEvent)
-{
-    pos = mEvent->pos();
-    update();
 }
 
 MouseData* Mouse::formPacketData()
@@ -24,32 +19,11 @@ MouseData* Mouse::formPacketData()
     return tmp;
 }
 
-void Mouse::mousePressEvent (QMouseEvent *mEvent)
+void Mouse::setMouseState(int x, int y, bool left, bool right)
 {
-    switch (mEvent->button())
-    {
-        case Qt::LeftButton:
-            isLeftKey = true;
-            break;
-        case Qt::RightButton:
-            isRightKey = true;
-            break;
-        default:
-            break;
-    }
-}
-
-void Mouse::mouseReleaseEvent(QMouseEvent *mEvent)
-{
-    switch (mEvent->button())
-    {
-        case Qt::LeftButton:
-            isLeftKey = false;
-            break;
-        case Qt::RightButton:
-            isRightKey = false;
-            break;
-        default:
-            break;
-    }
+    QCursor::setPos(x,y);
+    if (left)
+        mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, 1, 1, 0, 0);
+    if (right)
+        mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, 1, 1, 0, 0);
 }

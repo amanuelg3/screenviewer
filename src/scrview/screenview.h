@@ -28,6 +28,7 @@ private:
     Mouse *mouse;
     bool server;
     bool clicked;
+    bool eventFilter(QObject *obj, QEvent *event);
 private slots:
     void doTest();
     void doMouseTest();

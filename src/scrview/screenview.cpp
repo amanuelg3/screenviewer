@@ -85,5 +85,41 @@ void ScreenView::on_clientButton_clicked()
     z = new QTimer(this);
     z->start(500);
     connect(z, SIGNAL(timeout()), this, SLOT(doMouseTest()));
+    installEventFilter(this);
     //addWidget(mouse);
 }
+
+bool ScreenView::eventFilter(QObject *obj, QEvent *event)
+{
+    if(event->type() == QEvent::MouseButtonPress)
+    {
+        QMouseEvent *k = (QMouseEvent *)event;
+
+        Qt::MouseButtons mouseButton = k->button();
+        if( mouseButton == Qt::LeftButton )
+        {
+            mouse->leftClick(true);
+        }
+        else if( mouseButton == Qt::RightButton )
+        {
+            mouse->rightClick(true);
+        }
+    }
+    else if (event->type() == QEvent::MouseButtonRelease)
+    {
+        QMouseEvent *k = (QMouseEvent *)event;
+
+        Qt::MouseButtons mouseButton = k->button();
+
+        if( mouseButton == Qt::LeftButton )
+        {
+            mouse->leftClick(false);
+        }
+        else if( mouseButton == Qt::RightButton )
+        {
+            mouse->rightClick(false);
+        }
+    }
+    return true;
+}
+

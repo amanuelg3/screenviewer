@@ -123,3 +123,8 @@ bool ScreenView::eventFilter(QObject *obj, QEvent *event)
     return true;
 }
 
+
+void ScreenView::on_pushButton_clicked()
+{
+    mouse->setMouseState(10,1,true, mouse->isRightKeyP());
+}

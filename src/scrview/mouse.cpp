@@ -1,5 +1,7 @@
 #include "mouse.h"
-#include <windows.h>
+#ifdef Q_OS_WIN
+    #include <windows.h>
+#endif
 
 Mouse::Mouse(QWidget *parent) : QWidget(parent)
 {
@@ -22,8 +24,10 @@ MouseData* Mouse::formPacketData()
 void Mouse::setMouseState(int x, int y, bool left, bool right)
 {
     QCursor::setPos(x,y);
+#ifdef Q_OS_WIN
     if (left)
         mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, 1, 1, 0, 0);
     if (right)
         mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, 1, 1, 0, 0);
+#endif
 }

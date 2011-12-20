@@ -1,4 +1,4 @@
-#include "TestSsPacket.h"
+#include "testsspacket.h"
 #include "sspacket.h"
 #include <QtTest/QtTest>
 

@@ -46,7 +46,9 @@ void Client::requestNewFortune() {
 
 void Client::connectToHost()
 {
+    qDebug() << "Bandom connect to host" << host;
     socket->connectToHost(host, 4200);
+    qDebug() << "Connected";
 }
 
 void Client::disconnect()

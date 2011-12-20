@@ -120,7 +120,8 @@ void ScreenView::on_clientButton_clicked()
 {
     server = false;
     b = new Client(this);
-    b->setHost("127.0.0.1");
+	b->setHost("127.0.0.1");
+    //b->setHost("88.222.10.7"); test ip
     b->connectToHost();
     clicked = true;
 }

@@ -148,5 +148,6 @@ void ScreenView::on_pushButton_clicked()
     ui->clientButton->hide();
     this->resize(1024,768);
     setMouseTracking(true);
-    installEventFilter(this);
+    ui->label->installEventFilter(this);
+    ui->label->setMouseTracking(true);
 }

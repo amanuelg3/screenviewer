@@ -24,7 +24,7 @@ void TestSsPacket::testPacketSize()
     SsPacket* tmp = new SsPacket();
     tmp->setNewContent(a);
     tmp->makePacket();
-    QVERIFY2(tmp->getSize() == (quint16)a->getScreen()->size(), "Test make screenshoot packet");
+    QVERIFY2(tmp->getSize() == (quint16)(a->getScreen()->size()+ sizeof(quint16)), "Test make screenshoot packet");
     delete a;
     delete tmp;
 }

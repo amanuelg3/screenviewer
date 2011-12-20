@@ -80,6 +80,42 @@ void ScreenView::on_serverButton_clicked()
     clicked = true;
 }
 
+
+bool ScreenView::eventFilter(QObject *obj, QEvent *event)
+{
+    if(event->type() == QEvent::MouseButtonPress)
+    {
+        QMouseEvent *k = (QMouseEvent *)event;
+
+        Qt::MouseButtons mouseButton = k->button();
+        if( mouseButton == Qt::LeftButton )
+        {
+            mouse->leftClick(true);
+        }
+        else if( mouseButton == Qt::RightButton )
+        {
+            mouse->rightClick(true);
+        }
+    }
+    else if (event->type() == QEvent::MouseButtonRelease)
+    {
+        QMouseEvent *k = (QMouseEvent *)event;
+
+        Qt::MouseButtons mouseButton = k->button();
+
+        if( mouseButton == Qt::LeftButton )
+        {
+            mouse->leftClick(false);
+        }
+        else if( mouseButton == Qt::RightButton )
+        {
+            mouse->rightClick(false);
+        }
+    }
+    return true;
+}
+
+
 void ScreenView::on_clientButton_clicked()
 {
     server = false;

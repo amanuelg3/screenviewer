@@ -23,7 +23,7 @@ void TestMousePacket::testPacketSize()
     MousePacket* tmp = new MousePacket();
     tmp->setNewContent(a);
     tmp->makePacket();
-    quint16 size = sizeof(a->isRightKey) + sizeof(a->isLeftKey) + sizeof(a->x) + sizeof(a->y);
+    quint16 size = sizeof(a->isRightKey) + sizeof(a->isLeftKey) + sizeof(a->x) + sizeof(a->y)+ sizeof(quint16);
     QVERIFY2(tmp->getSize() == size, "Test make mouse packet");
     delete a;
     delete tmp;

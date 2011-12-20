@@ -15,7 +15,7 @@ void SsPacket::makePacket()
     currentPacket = new QByteArray();
     QDataStream out(currentPacket, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_2);
-    blockSize = ss->getScreen()->size();
+    blockSize = ss->getScreen()->size() + sizeof(quint16);
     out << (quint16) blockSize;
     out << (quint16) type;
     currentPacket->append(*ss->getScreen());

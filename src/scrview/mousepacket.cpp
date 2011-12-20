@@ -15,7 +15,7 @@ void MousePacket::makePacket()
     currentPacket = new QByteArray();
     QDataStream out(currentPacket, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_2);
-    blockSize = sizeof(md->isRightKey) + sizeof(md->isLeftKey) + sizeof(md->x) + sizeof(md->y);
+    blockSize = sizeof(md->isRightKey) + sizeof(md->isLeftKey) + sizeof(md->x) + sizeof(md->y) + sizeof(quint16);
     out << (quint16) blockSize;
     out << (quint16) type;
     out << md->x;

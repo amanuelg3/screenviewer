@@ -31,9 +31,10 @@ private:
     bool eventFilter(QObject *obj, QEvent *event);
 private slots:
     void doTest();
-    void doMouseTest();
+    void mouseSync();
     void on_serverButton_clicked();
     void on_clientButton_clicked();
     //void on_pushButton_clicked();
+    void on_pushButton_clicked();
 };
 #endif // SCREENSHOT_H

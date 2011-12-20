@@ -34,6 +34,10 @@ void Client::readyRead()
     qDebug() << "Baitu laukia eileje:" << socket->bytesAvailable();
     if (socket->bytesAvailable() < blockSize)
         return;
+
+    delete screen;
+    screen = new QByteArray();
+
     *screen = socket->read(blockSize);
     isDone = true;
     qDebug() << "Tokio dydzio paveiksliuka nuskaiciau:" << screen->size();

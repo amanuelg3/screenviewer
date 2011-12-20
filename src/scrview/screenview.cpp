@@ -37,7 +37,6 @@ void ScreenView::doTest()
     }
     else
     {
-
         if (b->isMade())// && b->fetchScreen()
         {
             QPixmap B;
@@ -47,7 +46,6 @@ void ScreenView::doTest()
             qDebug() << b->fetchScreen()->length();
             ui->label->setPixmap(B);
         }
-
     }
 }
 
@@ -57,7 +55,10 @@ void ScreenView::mouseSync()
         return;
 
     if (server)
+    {
+        //TODO: GET MOUSE DATA HERE. (MousePacket ???)
         mouse->setMouseState(mouse->getPos().x(),mouse->getPos().y(),mouse->isLeftKeyP(),mouse->isRightKeyP());
+    }
     else
         b->send(mouse->isRightKeyP(), mouse->isLeftKeyP(), mouse->getPos().x(), mouse->getPos().y());
 

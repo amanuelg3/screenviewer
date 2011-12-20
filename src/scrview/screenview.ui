@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1208</width>
+    <width>1362</width>
     <height>836</height>
    </rect>
   </property>
@@ -17,10 +17,10 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>691</width>
-      <height>531</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1024</width>
+      <height>768</height>
      </rect>
     </property>
     <property name="text">
@@ -30,8 +30,8 @@
    <widget class="QPushButton" name="serverButton">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
+      <x>1080</x>
+      <y>80</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -43,8 +43,8 @@
    <widget class="QPushButton" name="clientButton">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>10</y>
+      <x>1170</x>
+      <y>80</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -56,8 +56,8 @@
    <widget class="QGroupBox" name="gbox_login">
     <property name="geometry">
      <rect>
-      <x>940</x>
-      <y>70</y>
+      <x>1060</x>
+      <y>140</y>
       <width>241</width>
       <height>201</height>
      </rect>

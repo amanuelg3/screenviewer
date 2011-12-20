@@ -3,6 +3,7 @@
 #include <QPoint>
 #include <QWidget>
 #include <QMouseEvent>
+#include <QDebug>
 
 struct MouseData {
     MouseData(){}
@@ -27,6 +28,7 @@ public:
     bool isRightKeyP() { return isRightKey; }
     QPoint getPos() { return QCursor::pos(); }
     MouseData* formPacketData();
+    void setPos(QPoint pos) { this->pos = pos; qDebug() << "x: " << pos.x(); }
     void rightClick(bool t) { isRightKey = t; }
     void leftClick(bool t) { isLeftKey = t; }
     void setMouseState(int x, int y, bool left, bool right);

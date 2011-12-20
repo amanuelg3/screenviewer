@@ -21,8 +21,7 @@ SOURCES += main.cpp \
     testcapturer.cpp \
     testscreenshot.cpp \
     testsspacket.cpp \
-    IPdatabase.cpp \
-    testscreenshot.cpp
+    IPdatabase.cpp
 HEADERS += screenview.h \
     abstractpacket.h \
     screenshot.h \
@@ -36,8 +35,7 @@ HEADERS += screenview.h \
     testcapturer.h \
     testscreenshot.h \
     testsspacket.h \
-    IPdatabase.h \
-    testscreenshot.h
+    IPdatabase.h
 FORMS += screenview.ui
 CONFIG += mobility
 MOBILITY = 

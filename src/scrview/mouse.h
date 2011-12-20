@@ -6,15 +6,15 @@
 
 struct MouseData {
     MouseData(){}
-    MouseData(int x, int y, bool l, bool r) {
+    MouseData(quint16 x, quint16 y, bool l, bool r) {
         this->x = x;
         this->y = y;
         this->isLeftKey = l;
         this->isRightKey = r;
     }
 
-    int x;
-    int y;
+    quint16 x;
+    quint16 y;
     bool isLeftKey;
     bool isRightKey;
 };

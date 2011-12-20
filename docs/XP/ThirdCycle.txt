@@ -1,0 +1,12 @@
+Tasks for third develompment cycle:
+
+Class Reciever
+- Initiates new connection
+- In client collects packets from server
+- Saves byte arrays as screenshot in linked list
+
+Class Sender
+- Starts a server
+- Collects new screenshoot from Capturer and sends it to server
+
+STATUS: IN PROGRESS

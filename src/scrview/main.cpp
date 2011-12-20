@@ -6,6 +6,7 @@
 #include "testcapturer.h"
 #include "testsspacket.h"
 #include "testmousepacket.h"
+#include "testconfirmpacket.h"
 
 //#define TEST
 //#ifndef TEST
@@ -21,6 +22,8 @@ int main(int argc, char *argv[])
     QTest::qExec(&test3, argc, argv);
     TestMousePacket test4;
     QTest::qExec(&test4, argc, argv);
+    TestConfirmPacket test5;
+    QTest::qExec(&test5, argc, argv);
 
     ScreenView w;
 #if defined(Q_WS_S60)

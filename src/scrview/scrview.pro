@@ -21,7 +21,9 @@ SOURCES += main.cpp \
     testcapturer.cpp \
     testscreenshot.cpp \
     testsspacket.cpp \
-    IPdatabase.cpp
+    IPdatabase.cpp \
+    confirmpacket.cpp \
+    testconfirmpacket.cpp
 HEADERS += screenview.h \
     abstractpacket.h \
     screenshot.h \
@@ -35,7 +37,9 @@ HEADERS += screenview.h \
     testcapturer.h \
     testscreenshot.h \
     testsspacket.h \
-    IPdatabase.h
+    IPdatabase.h \
+    confirmpacket.h \
+    testconfirmpacket.h
 FORMS += screenview.ui
 CONFIG += mobility
 MOBILITY = 
@@ -47,3 +51,7 @@ symbian {
     TARGET.EPOCHEAPSIZE = 0x020000 \
         0x800000
 }
+
+
+
+

@@ -23,7 +23,14 @@ SOURCES += main.cpp \
     testsspacket.cpp \
     IPdatabase.cpp \
     confirmpacket.cpp \
-    testconfirmpacket.cpp
+    testconfirmpacket.cpp \
+    host.cpp \
+    testhost.cpp \
+    viewer.cpp \
+    scrcollector.cpp \
+    scrmaker.cpp \
+    mousedatacollector.cpp \
+    mousedatamaker.cpp
 HEADERS += screenview.h \
     abstractpacket.h \
     screenshot.h \
@@ -39,7 +46,14 @@ HEADERS += screenview.h \
     testsspacket.h \
     IPdatabase.h \
     confirmpacket.h \
-    testconfirmpacket.h
+    testconfirmpacket.h \
+    host.h \
+    testhost.h \
+    viewer.h \
+    scrcollector.h \
+    scrmaker.h \
+    mousedatacollector.h \
+    mousedatamaker.h
 FORMS += screenview.ui
 CONFIG += mobility
 MOBILITY = 
@@ -51,6 +65,20 @@ symbian {
     TARGET.EPOCHEAPSIZE = 0x020000 \
         0x800000
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -3,6 +3,9 @@
 
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QMutex>
+
+class Host;
 
 class Server : public QObject
 {
@@ -13,13 +16,18 @@ public slots:
     void acceptConnection();
 public:
     Server();
+    Server(QMutex* scrMutex, QMutex* mouseMutex, Host* parrentHost);
     void send(QByteArray data);
+    void sendPacket(QByteArray data);
     void listen(QHostAddress::SpecialAddress host, int port);
 private:
     quint16 blockSize;
-
     QTcpSocket *socket;
     QTcpServer *server;
+    QMutex* scrMutex;
+    QMutex* mouseMutex;
+    Host* parrentHost;
+
 
 };
 

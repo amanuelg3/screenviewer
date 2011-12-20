@@ -14,9 +14,10 @@ ScreenView::ScreenView(QWidget *parent) :
     //connect(z, SIGNAL(timeout()), this, SLOT(doTest()));
     connect(z, SIGNAL(timeout()), this, SLOT(doMouseTest()));
     z->start(500);
-    IPdatabase ip;
-    ip.setIP("", "");
-    //ip.getIP("", "");
+    IPdatabase *ip = new IPdatabase;
+
+    ip->setIP("blA", "aaa");
+    ip->getIP("blA", "aaa");
 }
 
 ScreenView::~ScreenView()

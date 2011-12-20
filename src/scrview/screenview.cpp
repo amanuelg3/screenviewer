@@ -74,6 +74,11 @@ void ScreenView::on_serverButton_clicked()
     //listen(QHostAddress::Any, 4200);
     a->listen(QHostAddress::Any, 4200);
     clicked = true;
+
+    ui->gbox_login->hide();
+    ui->serverButton->hide();
+    ui->clientButton->hide();
+    this->resize(1024,768);
 }
 
 
@@ -111,6 +116,12 @@ bool ScreenView::eventFilter(QObject *obj, QEvent *event)
             mouse->rightClick(false);
         }
     }
+
+    if(event->type() == QEvent::MouseMove)
+    {
+        QMouseEvent *k = (QMouseEvent *)event;
+        mouse->setPos(k->pos());
+    }
     return true;
 }
 
@@ -131,4 +142,11 @@ void ScreenView::on_pushButton_clicked()
     //b->setHost("88.222.10.7"); test ip
     b->connectToHost();
     clicked = true;
+
+    ui->gbox_login->hide();
+    ui->serverButton->hide();
+    ui->clientButton->hide();
+    this->resize(1024,768);
+    setMouseTracking(true);
+    installEventFilter(this);
 }

@@ -23,14 +23,13 @@ ScreenView::~ScreenView()
 }
 
 
-static MouseData* ScreenView::getMouseData() {
-    if (mouse == NULL)
-        mouse = new Mouse;
-    return new MouseData(mouse->getPos().x(), mouse->getPos().y(), mouse->isLeftKeyP(), mouse->isRightKeyP());
+MouseData* ScreenView::getMouseData() {
+    return new MouseData(20, 20, false, false);
 }
 
 void ScreenView::doTest()
 {
+    /*
     if (!clicked)
         return;
 
@@ -53,11 +52,12 @@ void ScreenView::doTest()
             qDebug() << b->fetchScreen()->length();
             ui->label->setPixmap(B);
         }
-    }
+    } */
 }
 
 void ScreenView::mouseSync()
 {
+    /*
     if (!clicked)
         return;
 
@@ -68,7 +68,7 @@ void ScreenView::mouseSync()
     }
     else
         b->send(mouse->isRightKeyP(), mouse->isLeftKeyP(), mouse->getPos().x(), mouse->getPos().y());
-
+    */
 }
 
 

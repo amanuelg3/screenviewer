@@ -9,6 +9,7 @@ Viewer::Viewer(QString host) {
     mouseProcess = new MouseDataMaker(mouseMutex, client);
     this->host = host;
     client->setHost(host);
+    client->connectToHost();
 }
 
 void Viewer::run() {

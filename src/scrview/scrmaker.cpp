@@ -31,4 +31,6 @@ void ScrMaker::run()
         scrMutex->unlock();
     }
     scrMutex->unlock();
+    delete packet;
+    delete screen;
 }

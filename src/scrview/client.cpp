@@ -1,6 +1,8 @@
 #include "client.h"
+#include "viewer.h"
+#include "sspacket.h"
 
-Client::Client(QObject *parent) :
+Client::Client(QObject *parent, Viewer* parrentViewer, QMutex* scrMutex, QMutex* mouseMutex) :
     QObject(parent)
 {
     screen = NULL;
@@ -8,7 +10,9 @@ Client::Client(QObject *parent) :
     socket = new QTcpSocket(this);
     isDone = false;
     canDelete = true;
-
+    this->scrMutex = scrMutex;
+    this->mouseMutex = mouseMutex;
+    this->parrentViewer = parrentViewer;
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
     connect(socket, SIGNAL(connected()), this, SLOT(connected()));
 }
@@ -16,32 +20,44 @@ Client::Client(QObject *parent) :
 
 void Client::connected()
 {
-    //socket->write(QString("Connected :P").toUtf8());
+    parrentViewer->start();
 }
 
 void Client::readyRead()
 {
-    QDataStream in(socket);
-    in.setVersion(QDataStream::Qt_4_0);
+    if (socket == NULL) return;
+    if ( socket->state() != QAbstractSocket::ConnectedState ) return;
 
+    QDataStream in(socket);
+    in.setVersion(QDataStream::Qt_4_2);
+    //in.setVersion( in.version() ); // set to the current Qt version instead
+
+    qDebug() << "skaitau paketa " << blockSize;
     if (blockSize == 0) {
-        if (socket->bytesAvailable() < (int)sizeof(quint16))
-            return;
+        if (socket->bytesAvailable() < (int)sizeof(quint16)) return;
         in >> blockSize;
-        qDebug() << "Tikiuosi gauti blockSize dydzio paveiksliuka:" << blockSize;
+        qDebug() << "Tikiuosi gauti blockSize dydzio paketa:" << blockSize;
     }
 
-    qDebug() << "Baitu laukia eileje:" << socket->bytesAvailable();
+    qDebug() << "Baitu laukia eileje:" << socket->bytesAvailable() << " reikia " << blockSize;
     if (socket->bytesAvailable() < blockSize)
         return;
 
-    delete screen;
-    screen = new QByteArray();
+    quint16 type;
+    in >> type;
 
-    *screen = socket->read(blockSize);
-    isDone = true;
-    qDebug() << "Tokio dydzio paveiksliuka nuskaiciau:" << screen->size();
+    switch(type)
+    {
+        case 0:
+            //gavom peles duomenis siunciam juos ispakavimui ir liepiam apdoroti
+            parrentViewer->takeScreenshot(SsPacket::analyzePacket(socket, blockSize));
+            scrMutex->unlock();
+            break;
+        default:
+            break;
+    }
     blockSize = 0;
+    if (socket->bytesAvailable() > 0) readyRead();
 }
 
 void Client::requestNewFortune() {
@@ -58,6 +74,7 @@ void Client::connectToHost()
 void Client::disconnect()
 {
     socket->disconnect();
+    parrentViewer->stop();
 }
 
 void Client::setHost(QString host)
@@ -72,8 +89,36 @@ QString Client::getHost()
 
 void Client::send(QByteArray a)
 {
-    //socket->write(a);
+    socket->write(a);
 }
+
+
+void Client::sendPacket(QByteArray data)
+{
+    if(socket == NULL) return;
+    if(socket->state() != QAbstractSocket::ConnectedState ) return;
+
+    QByteArray tmp;
+    QDataStream out(&tmp, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_4_2);
+    tmp.append(data);
+    //qDebug() << "Issiunciam: " << (quint32) tmp.size();
+    socket->write(tmp);
+    socket->flush();
+}
+
+/* OLD CODE
+
+
+
+
+
+
+
+
+
+
+  */
 
 void Client::send(bool isRight, bool isLeft, quint16 x, quint16 y)
 {

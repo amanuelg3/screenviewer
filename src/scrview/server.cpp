@@ -1,20 +1,5 @@
 #include "server.h"
 #include <QTest>
-#include "mousepacket.h"
-#include "confirmpacket.h"
-#include "sspacket.h"
-#include "host.h"
-
-Server::Server(QMutex* scrMutex, QMutex* mouseMutex, Host* parrentHost)
-{
-    this->scrMutex = scrMutex;
-    this->mouseMutex = mouseMutex;
-    this->parrentHost = parrentHost;
-    blockSize = 0;
-    server = new QTcpServer();
-    socket = NULL;
-    connect(server, SIGNAL(newConnection()), this, SLOT(acceptConnection()));
-}
 
 Server::Server()
 {
@@ -25,7 +10,6 @@ Server::Server()
 }
 
 
-
 void Server::acceptConnection()
 {
     qDebug() << "Gavau klienta";
@@ -33,12 +17,29 @@ void Server::acceptConnection()
     if (!socket)
     {
         socket = server->nextPendingConnection();
-        parrentHost->start();
         connect(socket, SIGNAL(readyRead()),
                 this, SLOT(readyRead()));
         connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
     }
 }
+
+/*
+void Server::incomingConnection(int socketfd)
+{
+    qDebug() << "Gavau klienta";
+    blockSize = 0;
+    if (!socket)
+    {
+        socket = new Qsocket(this);
+        socket->setSocketDescriptor(socketfd);
+
+        qDebug() << "New client from:" << socket->peerAddress().toString();
+
+        connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+
+    }
+}
+*/
 
 void Server::readyRead()
 {
@@ -65,14 +66,17 @@ void Server::readyRead()
 
     switch(type)
     {
+        case 0:
+            bool isLeftKey;
+            bool isRightKey;
+            quint16 x;
+            quint16 y;
+            in >> isLeftKey >> isRightKey >> x >> y;
+            qDebug() << isLeftKey << " " << isRightKey << " " << x << " " << y << "\n";
+            break;
         case 1:
-            //gavom peles duomenis siunciam juos ispakavimui ir liepiam apdoroti
-            parrentHost->takeMouseData(MousePacket::analyzePacket(in));
-            mouseMutex->unlock();
             break;
         case 2:
-            //galim siusti nauja screenshot
-            scrMutex->unlock();
             break;
         default:
             break;
@@ -85,7 +89,6 @@ void Server::disconnected()
 {
     delete socket;
     socket = NULL;
-    parrentHost->takeClient();
     qDebug() << "Client disconnected!\n";
 }
 
@@ -107,22 +110,6 @@ void Server::send(QByteArray data)
     socket->write(tmp);
     socket->flush();
 }
-
-void Server::sendPacket(QByteArray data)
-{
-    if(socket == NULL) return;
-    if(socket->state() != QAbstractSocket::ConnectedState ) return;
-
-    QByteArray tmp;
-    QDataStream out(&tmp, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_4_2);
-    tmp.append(data);
-    //qDebug() << "Issiunciam: " << (quint32) tmp.size();
-    socket->write(tmp);
-    socket->flush();
-}
-
-
 
 void Server::listen(QHostAddress::SpecialAddress host, int port)
 {

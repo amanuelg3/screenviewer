@@ -1,20 +1,10 @@
 #ifndef MOUSEDATAMAKER_H
 #define MOUSEDATAMAKER_H
-#include <QMutex>
-#include <QThread>
 
-class Client;
-
-class MouseDataMaker :  public QThread
+class MouseDataMaker
 {
-private:
-    QMutex* mutex;
-    Client* client;
-    bool stoped;
 public:
-    MouseDataMaker(QMutex* mutex, Client* client);
-    void run();
-    void stop() { stoped = true; }
+    MouseDataMaker();
 };
 
 #endif // MOUSEDATAMAKER_H

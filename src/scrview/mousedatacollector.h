@@ -15,9 +15,9 @@ private:
     MouseData* data;
 public:
     MouseDataCollector(QMutex* mutex, Server *server);
-    void run();
+    void run() {}
     void stop() { stoped = true; }
-    void newData(MouseData* data);
+    void newData(MouseData* data) { delete data; this->data = data; }
 };
 
 #endif // MOUSEDATACOLLECTOR_H

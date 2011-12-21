@@ -22,6 +22,13 @@ ScreenView::~ScreenView()
     delete ui;
 }
 
+
+static MouseData* ScreenView::getMouseData() {
+    if (mouse == NULL)
+        mouse = new Mouse;
+    return new MouseData(mouse->getPos().x(), mouse->getPos().y(), mouse->isLeftKeyP(), mouse->isRightKeyP());
+}
+
 void ScreenView::doTest()
 {
     if (!clicked)

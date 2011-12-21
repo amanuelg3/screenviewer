@@ -25,7 +25,7 @@ private:
     Capturer *capturer;
     Server *a;
     Client *b;
-    Mouse *mouse;
+    static Mouse *mouse;
     bool server;
     bool clicked;
     bool eventFilter(QObject *obj, QEvent *event);
@@ -34,6 +34,7 @@ private slots:
     void mouseSync();
     void on_serverButton_clicked();
     void on_clientButton_clicked();
+    static MouseData* getMouseData();
     //void on_pushButton_clicked();
     void on_pushButton_clicked();
 };

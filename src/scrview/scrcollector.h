@@ -2,6 +2,7 @@
 #define SCRCOLLECTOR_H
 #include <QMutex>
 #include <QThread>
+#include "screenshot.h"
 
 class Client;
 
@@ -11,9 +12,11 @@ private:
     QMutex* mutex;
     Client *client;
     bool stoped;
+    Screenshot* data;
 public:
     ScrCollector(QMutex* mutex, Client *client);
     void run();
+    void newData(Screenshot* data);
     void stop() { stoped = true; }
 };
 

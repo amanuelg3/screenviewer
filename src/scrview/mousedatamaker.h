@@ -8,10 +8,13 @@ class Client;
 class MouseDataMaker :  public QThread
 {
 private:
-    QMutex* scrMutex;
+    QMutex* mutex;
     Client* client;
+    bool stoped;
 public:
-    MouseDataMaker();
+    MouseDataMaker(QMutex* mutex, Client* client);
+    void run();
+    void stop() { stoped = true; }
 };
 
 #endif // MOUSEDATAMAKER_H

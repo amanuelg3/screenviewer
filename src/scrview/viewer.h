@@ -7,7 +7,7 @@
 
 class Client;
 
-class Viewer
+class Viewer: public QThread
 {
 private:
     QMutex* scrMutex;
@@ -21,6 +21,7 @@ public:
     Viewer(QString host);
     void run();
     void stop() { stopped = true; }
+    void takeScreenshot(Screenshot* data) { scrProcess->newData(data); }
 
 };
 

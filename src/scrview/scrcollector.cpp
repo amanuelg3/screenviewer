@@ -15,7 +15,7 @@ void ScrCollector::run() {
         mutex->lock();
         //new data
         qDebug() << "Gavau ekrana size: " << (int)data->getScreen()->size();
-        client->sendPacket(packet->makeAndGetPacket());
+        client->sendPacket(*packet->makeAndGetPacket());
         mutex->unlock();
         mutex->lock();
     }

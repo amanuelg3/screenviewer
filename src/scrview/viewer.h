@@ -20,7 +20,7 @@ private:
 public:
     Viewer(QString host);
     void run();
-    void stop() { stopped = true; }
+    void stop() { stoped = true; }
     void takeScreenshot(Screenshot* data) { scrProcess->newData(data); }
 
 };

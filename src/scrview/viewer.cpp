@@ -13,7 +13,16 @@ Viewer::Viewer(QString host) {
 }
 
 void Viewer::run() {
-    client->connectToHost();
+    stoped = false;
     scrProcess->start();
-    mouseProcess->
+    mouseProcess->start();
+    while (!stoped) {
+        //cheeck if connection  is not dropped
+    }
+    mouseProcess->stop();
+    scrProcess->stop();
+    scrMutex->unlock();
+    mouseMutex->unlock();
+    mouseProcess->wait();
+    scrProcess->wait();
 }

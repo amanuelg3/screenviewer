@@ -21,7 +21,7 @@ private:
     bool canDelete;
     Viewer* parrentViewer;
 public:
-    explicit Client(QObject *parent = 0, Viewer* parrentViewer, QMutex* scrMutex, QMutex* mouseMutex);
+    explicit Client(QObject *parent = 0, Viewer* parrentViewer = NULL, QMutex* scrMutex = NULL, QMutex* mouseMutex = NULL);
     void sendPacket(QByteArray data);
     void setHost(QString host);
     QString getHost();

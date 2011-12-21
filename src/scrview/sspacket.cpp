@@ -27,7 +27,7 @@ void SsPacket::setNewContent(Screenshot *ss)
     this->ss = ss;
 }
 
-static Screenshot* analyzePacket(QTcpSocket *socket, quint16 size)
+Screenshot* SsPacket::analyzePacket(QTcpSocket *socket, quint16 size)
 {
     QByteArray* screen = new QByteArray();
      *screen = socket->read(size);

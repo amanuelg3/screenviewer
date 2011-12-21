@@ -1,28 +1,21 @@
 #ifndef CLIENT_H
 #define CLIENT_H
-#include <QThread>
-#include <QMutex>
+
 #include <QObject>
 #include <QTcpSocket>
-
-class Viewer;
 
 class Client : public QObject
 {
     Q_OBJECT
 private:
-    QMutex* scrMutex;
-    QMutex* mouseMutex;
     QTcpSocket *socket;
     QString host;
     QByteArray *screen;
     bool isDone;
     quint16 blockSize;
     bool canDelete;
-    Viewer* parrentViewer;
 public:
-    explicit Client(QObject *parent = 0, Viewer* parrentViewer = NULL, QMutex* scrMutex = NULL, QMutex* mouseMutex = NULL);
-    void sendPacket(QByteArray data);
+    explicit Client(QObject *parent = 0);
     void setHost(QString host);
     QString getHost();
     void connectToHost();

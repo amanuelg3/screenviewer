@@ -11,10 +11,9 @@ ScreenView::ScreenView(QWidget *parent) :
     mouse = new Mouse();
     capturer = new Capturer(60, "JPG", 800, 600);
     z = new QTimer(this);
-    connect(z, SIGNAL(timeout()), this, SLOT(doTest()));
-    connect(z, SIGNAL(timeout()), this, SLOT(mouseSync()));
+    //connect(z, SIGNAL(timeout()), this, SLOT(doTest()));
+    connect(z, SIGNAL(timeout()), this, SLOT(doMouseTest()));
     z->start(500);
-    ui->gbox_login->hide();
 }
 
 ScreenView::~ScreenView()
@@ -22,14 +21,8 @@ ScreenView::~ScreenView()
     delete ui;
 }
 
-
-MouseData* ScreenView::getMouseData() {
-    return new MouseData(20, 20, false, false);
-}
-
 void ScreenView::doTest()
 {
-    /*
     if (!clicked)
         return;
 
@@ -43,6 +36,7 @@ void ScreenView::doTest()
     }
     else
     {
+
         if (b->isMade())// && b->fetchScreen()
         {
             QPixmap B;
@@ -52,23 +46,23 @@ void ScreenView::doTest()
             qDebug() << b->fetchScreen()->length();
             ui->label->setPixmap(B);
         }
-    } */
+
+    }
 }
 
-void ScreenView::mouseSync()
+void ScreenView::doMouseTest()
 {
-    /*
     if (!clicked)
         return;
 
     if (server)
     {
-        //TODO: GET MOUSE DATA HERE. (MousePacket ???)
-        mouse->setMouseState(mouse->getPos().x(),mouse->getPos().y(),mouse->isLeftKeyP(),mouse->isRightKeyP());
+
     }
     else
+    {
         b->send(mouse->isRightKeyP(), mouse->isLeftKeyP(), mouse->getPos().x(), mouse->getPos().y());
-    */
+    }
 }
 
 
@@ -91,9 +85,6 @@ void ScreenView::on_serverButton_clicked()
 
 bool ScreenView::eventFilter(QObject *obj, QEvent *event)
 {
-    if (server)
-        return false;
-
     if(event->type() == QEvent::MouseButtonPress)
     {
         QMouseEvent *k = (QMouseEvent *)event;
@@ -135,19 +126,15 @@ bool ScreenView::eventFilter(QObject *obj, QEvent *event)
 
 void ScreenView::on_clientButton_clicked()
 {
-    ui->gbox_login->show();
-}
-
-void ScreenView::on_pushButton_clicked()
-{
-    /*IPdatabase *ip = new IPdatabase;
-    ip->getIP(ui->input_user->text(), ui->input_pass->text());*/
-
     server = false;
+
     b = new Client(this);
-        b->setHost("127.0.0.1");
-    //b->setHost("88.222.10.7"); test ip
-    b->connectToHost();
+    IPdatabase *ip = new IPdatabase(b);
+
+    //ip->setIP("blA", "aaa");
+    ip->getIP(ui->input_user->text(), ui->input_pass->text());
+
+    //Hmz... Right place?
     clicked = true;
 
     ui->gbox_login->hide();
@@ -157,4 +144,14 @@ void ScreenView::on_pushButton_clicked()
     setMouseTracking(true);
     ui->label->installEventFilter(this);
     ui->label->setMouseTracking(true);
+
+    delete ip;
+}
+void ScreenView::on_pushButton_clicked()
+{
+    IPdatabase *ip = new IPdatabase();
+
+    //ip->setIP("blA", "aaa");
+    ip->setIP(ui->input_user->text(), ui->input_pass->text());
+    //Needs to remove memory leak
 }

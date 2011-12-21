@@ -33,6 +33,7 @@ private:
 private slots:
     void doTest();
     void mouseSync();
+    void doMouseTest();
     void on_serverButton_clicked();
     void on_clientButton_clicked();
     //void on_pushButton_clicked();
